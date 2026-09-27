@@ -27,7 +27,7 @@ const gallery = [
   "/photo7.jpeg",
   "/photo6.jpeg",
   "/photo17.jpeg",
-  "/photo4.jpeg",
+  "/photo19.jpeg",
   "/photo3.jpeg",
   "/photo2.jpeg",
   "/photo15.jpeg",
