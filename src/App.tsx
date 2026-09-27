@@ -485,7 +485,7 @@ On December 7, 2025, I confessed my feelings to her, and she accepted. Since the
           <section className="countdown section">
             <div className="countdown-copy">
               <p className="eyebrow">We have been together</p>
-              <h2>Counting down to another year of us</h2>
+              <h2>Counting every beautiful day we’ve shared together</h2>
               <p>Every second is one more little moment to look forward to.</p>
             </div>
             <div className="timer">
