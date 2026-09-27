@@ -19,36 +19,21 @@ const photo = (id: string) =>
     ? id
     : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1080&h=1080&q=82`;
 const gallery = [
-  "photo-1519225421980-715cb0215aed",
-  "photo-1511285560929-80b456fea0bc",
-  "photo-1544078751-58fee2d8a03b",
-  "photo-1519741497674-611481863552",
-  "photo-1523438885200-e635ba2c371e",
-  "/photo6.jpeg",
+  "/photo12.jpeg",
+  "/phtoto11.jpeg",
+  "/Photo13.jpeg",
+  "/photo14.jpeg",
+  "/phtoto16.jpeg",
   "/photo7.jpeg",
-  "photo-1474552226712-ac0f0961a954",
-  "photo-1520854221256-17451cc331bf",
-  "photo-1529634597503-139d3726fed5",
-  "photo-1494774157365-9e04c6720e47",
-  "photo-1518199266791-5375a83190b7",
-  "photo-1535254973040-607b474cb50d",
-  "photo-1501901609772-df0848060b33",
-  "photo-1516589178581-6cd7833ae3b2",
-  "photo-1517841905240-472988babdf9",
-  "photo-1522673607200-164d1b6ce486",
-  "photo-1525772764200-be829a350797",
-  "photo-1504159506876-f8338247a14a",
-  "photo-1529333166437-7750a6dd5a70",
-  "photo-1542810634-71277d95dcbb",
-  "photo-1529626455594-4ff0802cfb7e",
-  "photo-1534528741775-53994a69daeb",
-  "photo-1524504388940-b1c1722653e1",
-  "photo-1531123897727-8f129e1688ce",
-  "photo-1529139574466-a303027c1d8b",
-  "photo-1515886657613-9f3515b0c78f",
-  "photo-1539109136881-3be0616acf4b",
-  "photo-1496747611176-843222e1e57c",
-  "photo-1483985988355-763728e1935b",
+  "/photo6.jpeg",
+  "/photo17.jpeg",
+  "/photo4.jpeg",
+  "/photo3.jpeg",
+  "/photo2.jpeg",
+  "/photo15.jpeg",
+  "/photo10.jpeg",
+  "/photo9.jpeg",
+  "/sufenyoung.jpeg",
 ].map((id) => photo(id));
 const heartGallery = gallery.slice(0, 15);
 const youngPhotos = ["/Reachyoung.jpeg", "/sufenyoung.jpeg"];
@@ -64,17 +49,17 @@ const timeline: {
     number: "01",
     title: copy("The Beginning", "ការចាប់ផ្តើម"),
     body: copy(
-      "Two paths crossed, and a quiet hello became the beginning of everything.",
+      "This is our first Photobooth Together.",
       "ផ្លូវពីរបានជួបគ្នា ហើយពាក្យសួរសុខទុក្ខដ៏សាមញ្ញ បានក្លាយជាការចាប់ផ្តើមនៃអ្វីៗទាំងអស់។",
     ),
-    date: "12 · 04 · 2023",
+    date: "29 · December · 2025",
     image: "/photo2.jpeg",
   },
   {
     number: "02",
     title: copy("First Memory", "អនុស្សាវរីយ៍ដំបូង"),
     body: copy(
-      "A small café, a long conversation, and the feeling that time had slowed down for us.",
+      "Every weekend, we go to the cinema and watch movies together.",
       "ហាងកាហ្វេតូចមួយ ការសន្ទនាដ៏យូរ និងអារម្មណ៍ថាពេលវេលាបានឈប់សម្រាប់យើង។",
     ),
     date: "21 · 04 · 2023",
@@ -84,7 +69,7 @@ const timeline: {
     number: "03",
     title: copy("Growing Together", "ធំឡើងជាមួយគ្នា"),
     body: copy(
-      "Some days were golden, some were tender. Every one of them brought us closer home.",
+      "Sometimes, we have arguments, but we always find a solution to solve our problems. We learn from our mistakes and support each other so we can grow together.",
       "មានថ្ងៃខ្លះពោរពេញដោយពន្លឺ និងថ្ងៃខ្លះទន់ភ្លន់។ គ្រប់ថ្ងៃនាំយើងឲ្យកាន់តែជិតស្និទ្ធ។",
     ),
     date: "08 · 08 · 2023",
@@ -94,7 +79,7 @@ const timeline: {
     number: "04",
     title: copy("Today, Always", "ថ្ងៃនេះ និងជានិច្ច"),
     body: copy(
-      "Here we are, still choosing each other, with a whole lifetime of beautiful chapters ahead.",
+      "From today to always, together is my favorite place to be.",
       "នេះហើយជាយើង នៅតែជ្រើសរើសគ្នា និងមានជំពូកដ៏ស្រស់ស្អាតជាច្រើននៅខាងមុខ។",
     ),
     date: "12 · 04 · 2026",
@@ -154,20 +139,23 @@ function App() {
   const [musicPlaying, setMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [letterOpen, setLetterOpen] = useState(false);
+  const [letterUnlocked, setLetterUnlocked] = useState(false);
+  const [letterPassword, setLetterPassword] = useState("");
   const [now, setNow] = useState(() => Date.now());
   const relationshipStart = useMemo(() => new Date("2025-12-07T00:00:00"), []);
-  const anniversary = useMemo(() => new Date("2027-04-12T19:00:00"), []);
-  const remaining = Math.max(0, anniversary.getTime() - now);
+  const elapsed = Math.max(0, now - relationshipStart.getTime());
   const relationshipDays = Math.max(
     1,
     Math.floor((now - relationshipStart.getTime()) / 86400000) + 1,
   );
-  const years = Math.floor(remaining / 31557600000);
-  const months = Math.floor((remaining % 31557600000) / 2629800000);
-  const days = Math.floor((remaining % 2629800000) / 86400000);
-  const hours = Math.floor((remaining / 3600000) % 24);
-  const minutes = Math.floor((remaining / 60000) % 60);
-  const seconds = Math.floor((remaining / 1000) % 60);
+  const years = Math.floor(elapsed / 31557600000);
+  const months = Math.floor((elapsed % 31557600000) / 2629800000);
+  const days = Math.floor((elapsed % 2629800000) / 86400000);
+  const hours = Math.floor((elapsed / 3600000) % 24);
+  const minutes = Math.floor((elapsed / 60000) % 60);
+  const seconds = Math.floor((elapsed / 1000) % 60);
 
   useEffect(() => {
     const id = window.setInterval(() => setNow(Date.now()), 1000);
@@ -211,9 +199,9 @@ function App() {
             <div className="intro-backdrop" />
             <motion.div
               className="envelope"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
+              initial={{ y: 26, opacity: 0, scale: 0.86, rotateX: -12, rotateY: -8 }}
+              animate={{ y: 0, opacity: 1, scale: 1, rotateX: 0, rotateY: 0 }}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               onClick={() => setOpened(true)}
               role="button"
               tabIndex={0}
@@ -223,15 +211,8 @@ function App() {
               <div className="envelope-pattern" />
               <div className="envelope-content">
                 <Ornament />
-                <p className="eyebrow">AN ANNIVERSARY INVITATION</p>
-                <h1>
-                  Sothireach
-                  <br />
-                  <em>&</em> Sufen
-                </h1>
-                <p className="intro-khmer">
-                  Celebrating another beautiful year together
-                </p>
+                <p className="eyebrow">AN ANNIVERSARY</p>
+                <h1>Happy Anniversary Sufen</h1>
                 <div className="seal">
                   <Heart size={16} fill="currentColor" />
                 </div>
@@ -240,9 +221,6 @@ function App() {
                 </span>
               </div>
             </motion.div>
-            <button className="skip" onClick={() => setOpened(true)}>
-              Skip intro <ArrowRight size={15} />
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -306,7 +284,7 @@ function App() {
         <main>
           <section id="home" className="hero">
             <div className="hero-copy">
-              <p className="eyebrow">12 APRIL 2026 · OUR ANNIVERSARY</p>
+              <p className="eyebrow">07 December 2025 · OUR ANNIVERSARY</p>
               <h1>
                 Sothireach
                 <br />
@@ -387,7 +365,9 @@ function App() {
                 <p>
                   {t(
                     copy(
-                      "We met in the most ordinary way, and somehow that ordinary moment became our favorite story. Since then, we have collected little wonders: quiet mornings, unexpected adventures, and the kind of laughter that makes a home wherever we are.",
+                      `We first met on Discord. At first, we barely talked, but over time, our conversations grew longer as we shared stories about our lives and past relationships. Later, I invited her to watch a movie at K Mall Steung Meanchey, where we met in person for the first time.
+
+On December 7, 2025, I confessed my feelings to her, and she accepted. Since then, we have been together, sharing love, laughter, and beautiful memories. Our story started with a simple conversation, and now we are in love.`,
                       "យើងបានជួបគ្នាតាមរបៀបដ៏សាមញ្ញបំផុត ហើយពេលវេលាដ៏សាមញ្ញនោះ បានក្លាយជារឿងដែលយើងស្រឡាញ់បំផុត។ តាំងពីថ្ងៃនោះមក យើងបានប្រមូលអព្ភូតហេតុតូចៗ ដូចជាពេលព្រឹកដ៏ស្ងប់ស្ងាត់ ដំណើរផ្សងព្រេង និងសំណើចដែលធ្វើឲ្យគ្រប់ទីកន្លែងក្លាយជាផ្ទះ។",
                     ),
                     language,
@@ -439,7 +419,7 @@ function App() {
                 language={language}
                 eyebrow={copy("Keepsakes", "អនុស្សាវរីយ៍")}
                 title={copy(
-                  "Our goal to compete a lifetime",
+                  "Our goal is to complete a lifetime",
                   "អនុស្សាវរីយ៍ដែលយើងរក្សាទុក",
                 )}
               />
@@ -457,10 +437,10 @@ function App() {
               {[
                 {
                   image: '/photo8.jpeg',
-                  date: "18 · 06 · 2023",
+                  date: "09 · May · 2026",
                   title: copy("Our first adventure", "ដំណើរផ្សងព្រេងដំបូង"),
                   text: copy(
-                    "A weekend away, and a thousand new reasons to smile.",
+                    "Our first trip to Kampot — a beautiful memory we’ll always cherish..",
                     "ចុងសប្តាហ៍មួយ និងហេតុផលថ្មីៗរាប់ពាន់សម្រាប់ញញឹម។",
                   ),
                 },
@@ -469,7 +449,7 @@ function App() {
                   date: "Comming Soon",
                   title: copy("Siem Reap", "សៀមរាប"),
                   text: copy(
-                    "Sunset walks became our favorite kind of ritual.",
+                    "Our next plan for another year.",
                     "ការដើរមើលថ្ងៃលិច បានក្លាយជាទម្លាប់ដែលយើងចូលចិត្ត។",
                   ),
                 },
@@ -478,14 +458,14 @@ function App() {
                   date: "Comming Soon",
                   title: copy("Around the World ", "ជុំវិញពិភពលោក — ឆាប់ៗនេះ"),
                   text: copy(
-                    "Wherever we are together, that is home.",
+                    "Exploring the world together.",
                     "កន្លែងណាក៏ដោយដែលមានយើងពីរនាក់ នោះគឺជាផ្ទះ។",
                   ),
                 },
               ].map((item, i) => (
                 <motion.article
                   className="memory-card"
-                  key={item.date}
+                  key={`${item.title}-${i}`}
                   initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -504,7 +484,7 @@ function App() {
 
           <section className="countdown section">
             <div className="countdown-copy">
-              <p className="eyebrow">THE NEXT CHAPTER</p>
+              <p className="eyebrow">We have been together</p>
               <h2>Counting down to another year of us</h2>
               <p>Every second is one more little moment to look forward to.</p>
             </div>
@@ -548,56 +528,211 @@ function App() {
               eyebrow={copy("In frames", "ក្នុងរូបភាព")}
               title={copy("A gallery of us", "វិចិត្រសាលរបស់យើង")}
             />
-            <div className="gallery-grid">
-              {heartGallery.map((src, index) => (
-                <motion.button
-                  className={`gallery-item gallery-${index % 5}`}
-                  key={src}
-                  onClick={() => setLightbox(index)}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (index % 5) * 0.04 }}
-                >
-                  <img src={src} alt={`Memory ${index + 1}`} />
-                  <span>
-                    <Heart size={16} fill="currentColor" />
-                  </span>
-                </motion.button>
-              ))}
+            <div
+              className={`gallery-book ${galleryOpen ? "is-open" : ""}`}
+              onClick={() => setGalleryOpen((open) => !open)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setGalleryOpen((open) => !open);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={galleryOpen ? "Close photo book" : "Open photo book"}
+            >
+              <div className="gallery-pages">
+                <div className="gallery-page-mark" aria-hidden="true">✦</div>
+                <div className="gallery-grid">
+                  {heartGallery.slice(0, 12).map((src, index) => (
+                    <button
+                      className="gallery-photo"
+                      key={`${src}-${index}`}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setLightbox(index);
+                      }}
+                      aria-label={`Open memory ${index + 1}`}
+                    >
+                      <img
+                        src={src}
+                        alt={`Memory ${index + 1}`}
+                        width={1080}
+                        height={1080}
+                      />
+                      <span><Heart size={14} fill="currentColor" /></span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {galleryOpen && (
+                <div className="gallery-hearts" aria-hidden="true">
+                  {Array.from({ length: 14 }).map((_, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        left: `${8 + (index / 13) * 84}%`,
+                        animationDelay: `${index * 0.08}s`,
+                        animationDuration: `${1.5 + (index % 4) * 0.18}s`,
+                      }}
+                    >
+                      ♥
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div className="gallery-cover">
+                <img className="gallery-cover-photo" src="/photo2.jpeg" alt="" />
+                <div className="gallery-cover-shade" />
+                <div className="gallery-cover-border" />
+                <div className="gallery-cover-content">
+                  <Heart size={34} fill="currentColor" />
+                  <p className="eyebrow">OUR MEMORIES</p>
+                  <h3>A gallery of us</h3>
+                  <small>{galleryOpen ? "Tap to close" : "Tap to open"}</small>
+                </div>
+              </div>
             </div>
           </section>
 
           <section id="letter" className="letter section">
-            <div className="letter-card">
-              <div className="letter-seal">
-                <Heart size={17} fill="currentColor" />
+            <motion.div
+              className={`letter-card ${letterOpen ? "is-open" : ""} ${letterUnlocked ? "is-unlocked" : ""}`}
+              initial={{ opacity: 0, y: 28, rotateX: 22 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              onClick={() => {
+                if (!letterUnlocked) return;
+                setLetterOpen((open) => !open);
+              }}
+              onKeyDown={(event) => {
+                if (!letterUnlocked) return;
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setLetterOpen((open) => !open);
+                }
+              }}
+              role="button"
+              tabIndex={letterUnlocked ? 0 : -1}
+              aria-label={
+                letterUnlocked
+                  ? letterOpen
+                    ? "Close love letter"
+                    : "Open love letter"
+                  : "Locked love letter"
+              }
+            >
+              {letterUnlocked && letterOpen && (
+                <div className="letter-hearts" aria-hidden="true">
+                  {Array.from({ length: 14 }).map((_, index) => ({
+                    left: `${(index / 13) * 100}%`,
+                    delay: `${index * 0.08}s`,
+                    duration: `${1.5 + (index % 5) * 0.2}s`,
+                    drift: `${(index % 2 === 0 ? 1 : -1) * (18 + index * 6)}px`,
+                  })).map((heart, index) => (
+                    <span
+                      key={index}
+                      className="letter-heart"
+                      style={{
+                        left: heart.left,
+                        animationDelay: heart.delay,
+                        animationDuration: heart.duration,
+                        ["--drift" as any]: heart.drift,
+                      }}
+                    >
+                      ♥
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {!letterUnlocked && (
+                <div className="letter-lock" aria-label="Enter password to unlock">
+                  <div className="letter-lock-box">
+                    <div className="lock-heart">
+                      <Heart size={22} fill="currentColor" />
+                    </div>
+                    <p className="eyebrow">SURPRISE LETTER</p>
+                    <h3>Enter our special day</h3>
+                    <form
+                      className="letter-lock-form"
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        if (letterPassword === "071225") {
+                          setLetterUnlocked(true);
+                          setLetterOpen(true);
+                          setLetterPassword("");
+                        } else {
+                          setLetterPassword("");
+                        }
+                      }}
+                    >
+                      <input
+                        type="password"
+                        value={letterPassword}
+                        onChange={(event) => setLetterPassword(event.target.value)}
+                        placeholder="Password"
+                        aria-label="Our special day"
+                        maxLength={6}
+                      />
+                      <button type="submit">Unlock</button>
+                    </form>
+                  </div>
+                </div>
+              )}
+
+              <div className="letter-paper">
+                <div className="letter-paper-inner">
+                  <div className="letter-seal">
+                    <Heart size={17} fill="currentColor" />
+                  </div>
+                  <p className="eyebrow">A LETTER FROM MY HEART</p>
+                  <h2>
+                    {t(
+                      copy(
+                        "To my favorite person,",
+                        "ជូនចំពោះមនុស្សដែលខ្ញុំស្រឡាញ់បំផុត",
+                      ),
+                      language,
+                    )}
+                  </h2>
+                  <p className="letter-body">
+                    {t(
+                      copy(
+                        `Our story started on Discord, and from that simple hello, everything beautiful began. We shared stories, laughter, and little moments that slowly turned into something real and lasting.
+
+Then came our first movie together, our first trip, and the day I confessed my feelings to you. Since then, every day with you has felt like a gift.
+
+I am grateful for your love, your patience, and the way you make life feel lighter. I want to keep choosing you, keep growing with you, and keep making memories together.
+
+Thank you for being my favorite person and my home.`,
+                        "អរគុណសម្រាប់គ្រប់ស្នាមញញឹម គ្រប់អនុស្សាវរីយ៍ គ្រប់ការសន្ទនា និងគ្រប់ពេលវេលាដែលយើងបានចែករំលែក។ ដំណើររបស់យើងមិនល្អឥតខ្ចោះទេ ប៉ុន្តែគ្រប់ពេលវេលាជាមួយអ្នក គឺជាអ្វីដែលខ្ញុំថែរក្សា។ រីករាយខួបស្នេហា សម្លាញ់របស់ខ្ញុំ។ ខ្ញុំសង្ឃឹមថា យើងនឹងបន្តបង្កើតអនុស្សាវរីយ៍ដ៏ស្រស់ស្អាតជាមួយគ្នា។",
+                      ),
+                      language,
+                    )}
+                  </p>
+                  <div className="letter-sign">
+                    Forever yours,
+                    <br />
+                    <strong>Sothireach</strong>
+                  </div>
+                </div>
               </div>
-              <p className="eyebrow">A LETTER FROM MY HEART</p>
-              <h2>
-                {t(
-                  copy(
-                    "To my favorite person,",
-                    "ជូនចំពោះមនុស្សដែលខ្ញុំស្រឡាញ់បំផុត",
-                  ),
-                  language,
-                )}
-              </h2>
-              <p className="letter-body">
-                {t(
-                  copy(
-                    "Thank you for every smile, every memory, every conversation, and every moment we have shared. Our journey is not perfect, but every moment with you is something I treasure. Happy Anniversary, my love. I hope we continue creating beautiful memories together.",
-                    "អរគុណសម្រាប់គ្រប់ស្នាមញញឹម គ្រប់អនុស្សាវរីយ៍ គ្រប់ការសន្ទនា និងគ្រប់ពេលវេលាដែលយើងបានចែករំលែក។ ដំណើររបស់យើងមិនល្អឥតខ្ចោះទេ ប៉ុន្តែគ្រប់ពេលវេលាជាមួយអ្នក គឺជាអ្វីដែលខ្ញុំថែរក្សា។ រីករាយខួបស្នេហា សម្លាញ់របស់ខ្ញុំ។ ខ្ញុំសង្ឃឹមថា យើងនឹងបន្តបង្កើតអនុស្សាវរីយ៍ដ៏ស្រស់ស្អាតជាមួយគ្នា។",
-                  ),
-                  language,
-                )}
-              </p>
-              <div className="letter-sign">
-                Forever yours,
-                <br />
-                <strong>Sothireach</strong>
+
+              <div className={`letter-cover ${letterOpen ? "is-open" : ""}`} aria-hidden="true">
+                <div className="letter-cover-inner">
+                  <div className="letter-cover-flap" />
+                  <div className="letter-cover-label">
+                    <span className="eyebrow">A LETTER FROM MY HEART</span>
+                    <div className="cover-heart">
+                      <Heart size={22} fill="currentColor" />
+                    </div>
+                    <small>{letterOpen ? "Opened with love" : "Open with love"}</small>
+                  </div>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </section>
         </main>
 
